@@ -1,20 +1,16 @@
-/* eslint global-require: off, no-console: off, promise/always-return: off */
 
-/**
- * This module executes inside of electron's main process. You can start
- * electron renderer process from here and communicate with the other processes
- * through IPC.
- *
- * When running `npm run build` or `npm run build:main`, this file is compiled to
- * `./src/main.js` using webpack. This gives us some performance wins.
- */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain,Tray,Menu } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import windowStateKeeper from 'electron-window-state';
 
+
+// Optional set the idle time option in menu label..(3min,4min,5min,8min,10min)
+let idleTemplate=[{label:"3min"},{label:"4min"},{label:"5min"},{label:"8min"},{label:"10min"}];
+let contextMenu=Menu.buildFromTemplate(idleTemplate);
 class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -69,27 +65,46 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
+  //set Window Management State
+
+  let mainWindowState= windowStateKeeper({
+    defaultWidth:120,
+    defaultHeight:60,
+  })
+ // create new browser window
   mainWindow = new BrowserWindow({
     show: false,
-    width: 120,
-    height: 60,
+    x:mainWindowState.x,
+    y:mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
     frame:false,
-    transparent: true,
-    alwaysOnTop:true,
+    transparent: true, // transparent background
+    alwaysOnTop:true, // always on Top condition
     roundedCorners:false,
     webPreferences: {
       nodeIntegration:true,
-      devTools:false,
+      devTools:false, //remove devtools
         preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
-    resizable:false
+    resizable:false // avoid resizing
   });
 
-  mainWindow.loadURL(resolveHtmlPath('index.html'));
+  mainWindow.loadURL(resolveHtmlPath('index.html')); 
+    // manage mainWindow stateHere
+  mainWindowState.manage(mainWindow);
 
-  mainWindow.on('ready-to-show', () => {
+  mainWindow.webContents.on('context-menu',()=>{
+    contextMenu.popup();
+  })
+
+ // set the tray
+  // let tray =new Tray('idle.jpg');
+  // tray.setToolTip("Select idle time")
+
+    mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
