@@ -2,14 +2,32 @@
 .app{
     user-select: none;
     -webkit-app-region:drag;
-    border-radius: 5px;
-}
-
+    background-color: rgb(154, 165, 230);
+    border-radius: 12px;
+  };
+  .idlebutton{
+    user-select: none;
+    -webkit-app-region:drag;
+    font-size: 33px;
+    padding-left: 8px;
+    background-color: rgb(154, 165, 230);
+    border-radius: 12px;
+  };
+  ::-webkit-scrollbar
+  {
+    width: 0px;
+  }
   .time {
-    margin-top:-18px;
-    font-size: 1.1rem;
+    font-family: 'Times New Roman', Times, serif;
+    h1{
+      font-size: 16px;
+      margin-bottom: -24px;
+      margin-left: 8px;
+    }
     h2{
-        color:rgb(255, 255, 255);
-        font-family: 'Times New Roman', Times, serif;
+      font-size: 24px;
+        color:rgb(0, 0, 0);
+        margin-left: 8px;
+
     };
   };
