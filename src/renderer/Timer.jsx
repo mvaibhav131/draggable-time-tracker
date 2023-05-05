@@ -1,6 +1,8 @@
 import React from 'react';
 import "./timer.scss";
+import IdleTimer from 'react-idle-timer'
 import { useEffect, useState } from 'react';
+import { IdleTimerComponent } from 'react-idle-timer';
 
 
 const Timer = () => {
@@ -9,11 +11,12 @@ const Timer = () => {
     const [min,setMin]=useState(0);
     const [hr,setHr]=useState(0);
     const [isActive,setIsActive]=useState(true);
+    const [idle,setIdle]=useState(true);
   
     let time=null;
   
     useEffect(()=>{
-       if (isActive){
+       if (isActive ){
      time=setInterval(()=>{
       setSec(sec+1)
       if(sec===59){
@@ -27,17 +30,29 @@ const Timer = () => {
       }
       },1000)
     }
-      return ()=> clearInterval(time)
+      // return ()=> clearInterval(time)
     });
+    // const idleTime=()={
+
+    // }
 
   return (
     <>
-    <div className='app'>
-    <div className='time'>
-      <h2>{hr<10?"0"+hr:hr}:{min<10?"0"+min:min}:{sec<10?"0"+sec:sec}</h2>
+    
+    
+    {
+      idle ?(<div className='app'>
+      <div className='time'>
+      <h1>HH:MM:SS</h1>
+      <h2>{ hr<10?"0"+hr:hr}:{min<10?"0"+min:min}:{sec<10?"0"+sec:sec}</h2>
       </div>
-    </div>
-    </>
+     </div>):
+     (
+      <h1 className='idlebutton'>IDLE</h1>   
+     )
+  }
+   </>
+   
   )
 }
 
