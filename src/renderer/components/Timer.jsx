@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import './timer.scss';
-import IdleTimer from 'react-idle-timer';
+import { useIdleTimer } from "react-idle-timer";
 import { useEffect, useState } from 'react';
 import { IdleTimerComponent } from 'react-idle-timer';
 
@@ -11,13 +11,25 @@ const Timer = () => {
   const [hr, setHr] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [idle, setIdle] = useState(false);
-
+  const idleTimeRef = useRef(null);
   // set initial time value is null
+  
   let time = null;
-  let idleTime = 180 * 1000; // set the idle Time for 3 minutes
   // Set the function is checking the idle Time
 
-   // Setting the HH:MM:SS TIME
+  const onIdle = () => {
+     alert("You are Idle!")
+    //  setIdle(!idle);
+  };
+
+  const idletimer = useIdleTimer({
+    crossTab: true,
+    ref: idleTimeRef,
+    timeout: 60 * 1000,  // Set idle time  1min 
+    onIdle: onIdle,
+  });
+
+  // Setting the HH:MM:SS TIME
   useEffect(() => {
     if (isActive && !idle) {
       time = setInterval(() => {
@@ -34,28 +46,10 @@ const Timer = () => {
       },1000);
     }
     return () => clearInterval(time);
-  })
-
-  function check() {
-    if (window.onmousemove || window.onkeypress> idleTime) {
-      setIdle(true);
-      setIsActive(false);
-    } else {
-      setIdle(false);
-      setIsActive(true);
-      setSec(sec + 1);
-      // is check the sec should start previous pause
-    };
-  };
-  // Function to check Idle time every second
-(setInterval(()=>{
-  check()
-},idleTime))
-  
-  
+  });
 
   return (
-    <>
+    <div idleTimer={idletimer}>
       {idle ? (
         <h1 className="idlebutton">IDLE</h1>
       ) : (
@@ -69,7 +63,7 @@ const Timer = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
