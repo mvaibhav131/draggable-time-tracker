@@ -28,6 +28,7 @@ function Timer() {
   // Setting the HH:MM:SS TIME
   useEffect(() => {
     if (isActive && !idle) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       time = setInterval(() => {
         setSec(sec + 1);
         if (sec === 59) {
@@ -39,10 +40,11 @@ function Timer() {
           setMin(0);
           setSec(0);
         }
-      },1000);
+      }, 1000);
     }
     return () => clearInterval(time);
   });
+
   return (
     <div idleTimer={idletimer}>
       {idle ? (
