@@ -21,7 +21,6 @@ function Timer() {
     alert('You are Idle!');
     //  setIdle(!idle);
   };
-
   const idletimer = useIdleTimer({
     crossTab: true,
     ref: idleTimeRef,
