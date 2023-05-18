@@ -9,6 +9,7 @@ function Timer() {
   const [sec, setSec] = useState(0);
   const [min, setMin] = useState(0);
   const [hr, setHr] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [isActive, setIsActive] = useState(true);
   const [idle, setIdle] = useState(false);
   const idleTimeRef = useRef(null);
