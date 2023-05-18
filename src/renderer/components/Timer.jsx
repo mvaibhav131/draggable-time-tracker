@@ -16,7 +16,6 @@ function Timer() {
   
   let time = null;
   // Set the function is checking the idle Time
-
   const onIdle = () => {
     alert('You are Idle!');
     //  setIdle(!idle);
