@@ -47,7 +47,6 @@ function Timer() {
     }
     return () => clearInterval(time);
   });
-
   return (
     <div idleTimer={idletimer}>
       {idle ? (
