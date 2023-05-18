@@ -61,4 +61,5 @@ function Timer() {
     </div>
   );
 }
+
 export default Timer;
