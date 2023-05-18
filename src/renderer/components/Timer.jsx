@@ -13,8 +13,7 @@ function Timer() {
   const [idle, setIdle] = useState(false);
   const idleTimeRef = useRef(null);
   // set initial time value is null
-  
-  let time = null;
+    let time = null;
   // Set the function is checking the idle Time
   const onIdle = () => {
     alert('You are Idle!');
