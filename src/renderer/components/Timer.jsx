@@ -1,7 +1,8 @@
-import React,{useRef} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './timer.scss';
-import { useIdleTimer } from "react-idle-timer";
-import { useEffect, useState } from 'react';
+// eslint-disable-next-line import/no-duplicates
+import { useIdleTimer } from 'react-idle-timer';
+// eslint-disable-next-line no-unused-vars, import/no-duplicates
 import { IdleTimerComponent } from 'react-idle-timer';
 
 function Timer() {
