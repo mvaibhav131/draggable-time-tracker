@@ -50,6 +50,7 @@ function Timer() {
   });
 
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <div idleTimer={idletimer}>
       {idle ? (
         <h1 className="idlebutton">IDLE</h1>
@@ -58,8 +59,8 @@ function Timer() {
           <div className="time">
             <h1>HH:MM:SS</h1>
             <h2>
-              {hr < 10 ? '0' + hr : hr}:{min < 10 ? '0' + min : min}:
-              {sec < 10 ? '0' + sec : sec}
+              {hr < 10 ? `0${hr}` : hr}:{min < 10 ? `0${min}` : min}:
+              {sec < 10 ? `0${sec}` : sec}
             </h2>
           </div>
         </div>
