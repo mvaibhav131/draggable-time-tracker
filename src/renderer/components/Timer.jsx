@@ -26,8 +26,8 @@ function Timer() {
   const idletimer = useIdleTimer({
     crossTab: true,
     ref: idleTimeRef,
-    timeout: 60 * 1000,  // Set idle time  1min 
-    onIdle: onIdle,
+    timeout: 60 * 1000, // Set idle time  1min
+    onIdle,
   });
   // Setting the HH:MM:SS TIME
   useEffect(() => {
