@@ -12,6 +12,7 @@ function Timer() {
   const [hr, setHr] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [isActive, setIsActive] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [idle, setIdle] = useState(false);
   const idleTimeRef = useRef(null);
   // set initial time value is null
