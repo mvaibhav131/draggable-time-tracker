@@ -4,7 +4,7 @@ import { useIdleTimer } from "react-idle-timer";
 import { useEffect, useState } from 'react';
 import { IdleTimerComponent } from 'react-idle-timer';
 
-const Timer = () => {
+function Timer() {
   // react hooks
   const [sec, setSec] = useState(0);
   const [min, setMin] = useState(0);
@@ -18,7 +18,7 @@ const Timer = () => {
   // Set the function is checking the idle Time
 
   const onIdle = () => {
-     alert("You are Idle!")
+    alert('You are Idle!');
     //  setIdle(!idle);
   };
 
@@ -65,6 +65,6 @@ const Timer = () => {
       )}
     </div>
   );
-};
+}
 
 export default Timer;
